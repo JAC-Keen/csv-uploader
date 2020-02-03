@@ -30,17 +30,27 @@ Objective: Create a CSV Uploader to POST the files’ data to the designated Kee
 
 Steps to achieve
 
-Create an API that can handle a Post Request to Keen API project endpoints  
+Create an API that can handle a Post Request to Keen API project endpoints
+
 This api should Upload a CSV file  
+
 Logic that converts this CSV file into a Json format  
+
 An end user will insert their project id to the form field input  
+
 An end user will insert their write key to the form field input  
+
 An end user will insert the name of the collection to the form field input  
+
 A URL will appear on load and will the dynamic render the field inputs  
+
 A submit button will run a POST Request to the dynamic URL  
+
 This page will respond with a success or failure message  
+
 If it’s successful this page will render a 200 Message "success": true  
-If it’s a failure this page will render the code with some diagnosis such as having hit the streaming   limitations or a file size exceeding 400k limits (100k rows of data) etc  
+
+If it’s a failure this page will render the code with some diagnosis such as having hit the streaming limitations or a file size exceeding 400k limits (100k rows of data) etc  
 
 What a successful output it will look like:  
 https://jac-keen.github.io/csv-uploader/
