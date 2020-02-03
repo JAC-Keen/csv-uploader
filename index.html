@@ -1,68 +1,97 @@
-<div class="container">
-    <div class="section">
-        <div class="section__indicator">
-            1
-        </div>
-        <div class="section__content">
-            <h2>Upload your CSV file</h2>
-            <div class="input-group">
-                <div>
-                    <input type="file" id="storeDataCsv" accept=".csv">
-                    <label class="custom-file-label" for="storeDataCsv">
-                        Choose file (csv)
-                    </label>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="section">
+            <div class="section__indicator">
+                1
+            </div>
+            <div class="section__content">
+                <h2>Upload your CSV file</h2>
+                <div class="input-group">
+                    <div>
+                        <input type="file" id="storeDataCsv" accept=".csv">
+                        <label class="custom-file-label" for="storeDataCsv">
+                            Choose file (csv)
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="section">
-        <div class="section__indicator">
-            2
+
+        <div class="section">
+            <div class="section__indicator">
+                2
+            </div>
+            <div class="section__content">
+                <h2>Enter your Project ID</h2>
+                <form>
+                  Enter Your Project ID
+                  <br>
+                  <input type="text" name="Project ID">
+                  <br>
+                </form>
+            </div>
         </div>
-        <div class="section__content">
-            <h2>Enter your Project ID</h2>
-            <form>
-              Enter Your Project ID
-              <br>
-              <input type="text"                                name="Project ID">
-              <br>
+
+        <div class="section">
+            <div class="section__indicator">
+                3
+            </div>
+            <div class="section__content">
+                <h2>Enter your Write Key</h2>
+                <form>
+                  Enter Your Write Key
+                  <br>
+                  <input type="text" name="Write Key">
+                  <br>
+                </form>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section__indicator">
+                4
+            </div>
+            <div class="section__content">
+                <h2>Enter a name for your collection</h2>
+                <form>
+                  Collection Name
+                  <br>
+                  <input type="text" name="Collection Name">
+                  <br>
+                </form>
+            </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+                5
+          </div>
+          <div class="section__content">
+            <h2>We're making a POST REQUEST to your API Endpoint</h2>
+              <p> Does the following look correct? <br>https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME </br></p>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section__indicator">
+                6
+          </div>
+          <div class="section__content">
+            <form action="https://api.keen.io/3.0/">
+              <h2>Submit</h2>
+              <input type="submit" value="Submit">
             </form>
+          </div>
         </div>
     </div>
-    
-    <div class="section">
-        <div class="section__indicator">
-            3
-        </div>
-        <div class="section__content">
-            <h2>Enter your Write Key</h2>
-            <form>
-              Enter Your Write Key
-              <br>
-              <input type="text"                                name="Write Key">
-              <br>
-            </form>
-        </div>
-    </div>
-     <div class="section">
-        <div class="section__indicator">
-            4
-        </div>
-        <div class="section__content">
-         <h2>We're making a POST REQUEST to your API Endpoint</h2>
-            <p>
-                Does the following look correct? </br> https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME
-            </p>
-        </div>
-    </div>
-         <div class="section">
-        <div class="section__indicator">
-            5
-        </div>
-        <div class="section__content">
-            <h2>Submit</h2>
-            <input type="submit" value="Submit">
-        </div>
-    </div>
-</div>
+
+  </body>
+</html>
