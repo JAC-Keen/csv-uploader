@@ -13,7 +13,7 @@ curl https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME \
  -H 'Content-Type: application/json' \
  -d '{
     "key": 123
-   }'
+    }'
 
 GET Request via Curl
 
