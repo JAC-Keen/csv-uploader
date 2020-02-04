@@ -1,8 +1,8 @@
 csv-uploader user interface
 
-The following will be a provide to end users as a solution when uploading CSV's
-currently the process is still heavy for those users looking to evaluate Keen in a trial basis
-or to users that would like a simple way to upload smaller batches of events via a CSV file
+The following solution is to provide all enduser a simple way of uploading a CSV.
+The process is still heavy for those users looking to evaluate Keen in a trial basis  
+or to users that would like to upload smaller collections of batch streams.
 
 <img src="balsamiq-mockup.png" alt="Quote">
 
