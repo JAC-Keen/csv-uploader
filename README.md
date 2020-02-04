@@ -4,6 +4,8 @@ The following will be a provide to end users as a solution when uploading CSV's
 currently the process is still heavy for those users looking to evaluate Keen in a trial basis
 or to users that would like a simple way to upload smaller batches of events via a CSV file
 
+<img src="balsamiq-mockup.png" alt="Quote">
+
 This will be a UI abstraction to CLI process.
 https://github.com/keen/keen-cli
 
