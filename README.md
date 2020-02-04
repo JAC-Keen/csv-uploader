@@ -1,8 +1,7 @@
 csv-uploader user interface
 
 The following solution is to provide all enduser a simple way of uploading a CSV.
-The process is still heavy for those users looking to evaluate Keen in a trial basis  
-or to users that would like to upload smaller collections of batch streams.
+The process is still heavy for those users looking to evaluate Keen in a trial basis or to users that would like to upload smaller collections of batch streams.
 
 <img src="balsamiq-mockup.png" alt="Quote">
 
