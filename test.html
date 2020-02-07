@@ -4,21 +4,29 @@
   <title>Untitled Page</title>
 </head>
 <body>
+
+  <!-- Stackoverflow Example -->
+  <!-- https://stackoverflow.com/questions/42424033/create-a-dynamic-link-url-based-on-user-info-on-input-field -->
+
 <form id="form">
-  <input type="text" name="place" placeholder="Place" value="" id="place" required>
-  <input type="text" name="day" placeholder="Day" value="" id="day" required>
-  <input type="text" name="month" placeholder="Month" value="" id="month" required>
-  <input type="text" name="year" placeholder="Year" value="" id="year" required>
+
   <input type="text" name="id_number" placeholder="ID Number" value="" id="id_number" required>
+  <input type="text" name="_base64_text" placeholder="Base64 Text" value="" id="id_base64_text" required>
   <button type="submit" id="button">Click Me!</button>
 </form>
+
+<!-- Test Payload -->
+<!-- ewogICAgImZpcnN0X25hbWUiOiAic2VydmluZyB1cCBzb21lIG5ldyBkYXRhIiwKICAgICJhZ2UiOiA0NSwKICAgICJkb3dubG9hZGVkX2ZpbGU/IjogZmFsc2UKfQ== -->
+
+<!-- Master Key -->
+
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
   $(document).ready(function () {
     $("#form").on('submit', function (e) {
       e.preventDefault();
-      window.location.replace("http://www.example.com/page/" + $("#place").val() + "/" + $("#day").val() + "-" + $("#month").val() + "-" + $("#year").val() + "/" + $("#id_number").val());
+      window.location.replace("https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/test_markup?api_key=" + $("#id_number").val() + "&data=" + $("#id_base64_text").val() );
     });
   });
 </script>

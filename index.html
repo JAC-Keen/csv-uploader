@@ -77,9 +77,10 @@
             6
           </div>
           <div class="section__content">
-            <form action="https://api.keen.io/3.0/">
+            <form action="https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/pseudo_test?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED">
               <h2>Submit your file</h2>
-              <input type="submit" value="Submit ✔️">
+              <!-- <input type="submit" value="Submit ✔️"> -->
+              <button type="submit" formmethod="post">POST ✔️</button>
             </form>
           </div>
         </div>
@@ -87,15 +88,15 @@
 
 
     <!-- Logic , alter the html elements/jquery selectors to update the url -->
-    <!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
       $(document).ready(function () {
         $("#form").on('submit', function (e) {
           e.preventDefault();
-          window.location.replace("http://www.example.com/page/" + $("#place").val() + "/" + $("#day").val() + "-" + $("#month").val() + "-" + $("#year").val() + "/" + $("#id_number").val());
+          window.location.replace("https://api.keen.io/3.0/projects/" + $("#place").val() + "/" + $("#day").val() + "-" + $("#month").val() + "-" + $("#year").val() + "/" + $("#id_number").val());
         });
       });
-    </script> -->
+    </script>
 
   </body>
 </html>
