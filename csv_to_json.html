@@ -64,36 +64,22 @@
 	<div id="output"></div> -->
 
 <script type="text/javascript">
-
-
-
 var output = document.getElementById("output");
-
 //var csv is the CSV file with headers
 function csvJSON(csv){
-
   var lines=csv.split("\n");
-
   var result = [];
-
   var headers=lines[0].split(",");
-
   for(var i=1;i<lines.length;i++){
-
 	  var obj = {};
 	  var currentline=lines[i].split(",");
-
 	  for(var j=0;j<headers.length;j++){
 		  obj[headers[j]] = currentline[j];
 	  }
-
 	  result.push(obj);
-
   }
-
   //return result; //JavaScript object
   return JSON.stringify(result); //JSON
-
 }
 
     /* Drag drop code */
@@ -115,16 +101,15 @@ function csvJSON(csv){
         //if(file.type.match(/text\/csv/)){
 	    	oFReader = new FileReader();
 	        oFReader.onloadend = function() {
-
 	        	// console.log(csvJSON(this.result));
 	        	var json = csvJSON(this.result);
 						console.log(json);
 
 	        	var blob = new Blob([json], {type: 'application/json'});
-						// console.log(blob);
+						console.log(blob);
+
 	        	var url = URL.createObjectURL(blob);
 	        	output.innerHTML = '<a href="'+url+'">JSON file</a>';
-
 	        };
 	        oFReader.readAsText(file);
         } else {
@@ -132,15 +117,15 @@ function csvJSON(csv){
         }
     }
 
-
 		$('#submitButton').click(function(){ SubmitFeedback(); return false; });
-
-			// Ajax Post Request with feedback for sentiment analysis and magnitude score via Google Cloud Function
+			// *recycle Ajax Post Request with feedback for sentiment analysis and magnitude score via Google Cloud Function
+			// this function below needs to be able to replace the "data:" payload with the json object (currently having issues)
 		var SubmitFeedback = function() {
 			$.ajax({
 					type: "POST",
 					url: "https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/converted_csv?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED",
-          data: JSON.stringify({ review_text: $('#feedbackText').val() }),
+					// data: JSON.stringify({ review_text: $('#feedbackText').val() }),
+          data: JSON.stringify({ review_text: "to be replaced" }),
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					// log a success if it sends as expected and display message in markup
