@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jorge Cano</title>
+  <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.4/css/bulma.min.css" />
+<!--   <link rel="stylesheet" type="text/css" href="css/stylesheet.css"> -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <section class="hero is-info is-fullheight">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="https://keen.io/">
+                            <img src="keen-logo.svg" alt="Logo">
+                        </a>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="https://keen.io/">
+                                    <span class="icon">
+                                        <i class="fa fa-home"></i>
+                                    </span>
+                                    <span>Home</span>
+                                </a>
+                            </span>
+
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="https://keen.io/docs/">
+                                    <span class="icon">
+                                        <i class="fa fa-book"></i>
+                                    </span>
+                                    <span>Documentation</span>
+                                </a>
+                            </span>
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="https://github.com/JAC-Keen/keen-nlp-function">
+                                    <span class="icon">
+                                        <i class="fa fa-github"></i>
+                                    </span>
+                                    <span>View Source</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title">
+                          Keen Tutorial: <br>Post Data to your API Endpoint
+                        </h1>
+                        <h2 class="subtitle">
+                            Submit some feedback in the box below
+                        </h2>
+                        <div class="box">
+
+                          <div class="field is-grouped">
+                              <p class="control is-expanded">
+                                  <input id="feedbackText" class="input" type="text" placeholder="Enter your feedback...">
+                              </p>
+                              <p class="control">
+                                  <a id="submitButton" class="button is-info" id="submitButton">
+                                      Send Feedback
+                                  </a>
+                              </p>
+                          </div>
+                          <div id="errornote" style="display:none"><p>Oops got an error, check your console logs!</p></div>
+                          <div id="thankyou" style="display:none"><p>Thank you for your Feedback!</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Base64encode Example -->
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title">
+                          Base 64 Encode Example
+                        </h1>
+                        <h2 class="subtitle">
+                            This is an example of using encoded data
+                        </h2>
+                        <div class="box">
+                          <div class="field is-grouped">
+                              <p class="control is-expanded">
+                                  <!-- <input id="feedbackText" class="input" type="text" placeholder="Enter your feedback..."> -->
+
+                                  <form id="form">
+                                    <input type="text" name="id_number" placeholder="ID Number" value="" id="id_number" required>
+                                    <input type="text" name="_base64_text" placeholder="Base64 Text" value="" id="id_base64_text" required>
+                                    <button type="submit" id="button">Click Me!</button>
+                                  </form>
+
+                              </p>
+                              <p class="control">
+                                  <!-- <a id="submitButton" class="button is-info" id="submitButton">
+                                      Send Feedback
+                                  </a> -->
+                              </p>
+                          </div>
+                          <div id="errornote" style="display:none"><p>Oops got an error, check your console logs!</p></div>
+                          <div id="thankyou" style="display:none"><p>Thank you for your Feedback!</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+    <script type="text/javascript">
+      // Keen Auto Collector
+
+      // (function(name,path,ctx){ctx[name]=ctx[name]||{ready:function(fn){var h=document.getElementsByTagName('head')[0],s=document.createElement('script'),w=window,loaded;s.onload=s.onerror=s.onreadystatechange=function(){if((s.readyState&&!(/^c|loade/.test(s.readyState)))||loaded){return}s.onload=s.onreadystatechange=null;loaded=1;ctx[name].ready(fn)};s.async=1;s.src=path;h.parentNode.insertBefore(s,h)}}})
+      // ('KeenTracking', 'https://cdn.jsdelivr.net/npm/keen-tracking@4/dist/keen-tracking.min.js', this);
+      // KeenTracking.ready(function(){
+      //   const client = new KeenTracking({
+      //     projectId: '5e3ba28ec9e77c000184406d',
+      //     writeKey: '79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED'
+      //   });
+      //   // Record events automatically
+      //   client.initAutoTracking();
+      // });
+
+      $('#submitButton').click(function(){ SubmitFeedback(); return false; });
+
+        // Ajax Post Request with feedback for sentiment analysis and magnitude score via Google Cloud Function
+      var SubmitFeedback = function() {
+        $.ajax({
+            type: "POST",
+            url: "https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/data_open_text_field?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED",
+            data: JSON.stringify({ review_text: $('#feedbackText').val() }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            // log a success if it sends as expected and display message in markup
+            success: function(data){
+              $("#thankyou").show();
+              $("#errornote").hide();
+              $("#submitButton").hide();
+              $("#feedbackText").hide();
+              console.log('success', data)
+            },
+            // log error message in our console if an error occurs and display message in markup
+            error: function(errMsg) {
+              $("#thankyou").hide();
+              $("#errornote").show();
+              console.log("got an error", errMsg)
+            }
+        });
+      }
+
+      $(document).ready(function () {
+        $("#form").on('submit', function (e) {
+          e.preventDefault();
+          window.location.replace("https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/test_markup?api_key=" + $("#id_number").val() + "&data=" + $("#id_base64_text").val() );
+        });
+      });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+User_ID,City,State,Email_Status,Satisfaction_Rating,Email_Campaign,keen.timestamp
+12,Seattle,WA,Opened,7,CLI Upload,2020-01-03T03:01:00+0000
+13,Seattle,WA,Clicked,8,CLI Upload,2020-01-05T05:02:00+0000
+14,Seattle,WA,Unsubscribed,9,CLI Upload,2020-01-07T07:04:00+0000
+15,Seattle,WA,Responded,7,CLI Upload,2020-01-09T09:06:00+0000
+16,Seattle,WA,Delivered,8,CLI Upload,2020-01-11T11:08:00+0000
+17,Seattle,WA,Bounced,9,CLI Upload,2020-01-13T13:10:00+0000
+18,Seattle,WA,Opened,7,CLI Upload,2020-01-15T15:12:00+0000
+19,Seattle,WA,Clicked,8,CLI Upload,2020-01-17T17:14:00+0000
+20,Dallas,TX,Unsubscribed,9,CLI Upload,2020-01-19T19:16:00+0000
+21,Dallas,TX,Responded,7,CLI Upload,2019-01-01T01:18:00+0000
+22,Dallas,TX,Delivered,8,CLI Upload,2019-02-03T03:20:00+0000
+23,Dallas,TX,Bounced,9,CLI Upload,2019-03-05T05:22:00+0000
+24,Dallas,TX,Opened,7,CLI Upload,2019-04-07T07:24:00+0000
+25,Dallas,TX,Clicked,8,CLI Upload,2019-05-09T09:26:00+0000
+26,Dallas,TX,Unsubscribed,9,CLI Upload,2019-06-11T11:28:00+0000
+27,Dallas,TX,Responded,7,CLI Upload,2019-07-13T13:30:00+0000
+28,Dallas,TX,Delivered,8,CLI Upload,2019-08-15T15:32:00+0000
+29,Dallas,TX,Bounced,9,CLI Upload,2019-09-17T17:34:00+0000
+30,Dallas,TX,Opened,10,CLI Upload,2019-10-19T19:36:00+0000

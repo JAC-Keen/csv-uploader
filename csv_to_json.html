@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSV to JSON </title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.4/css/bulma.min.css" />
+	<!--   <link rel="stylesheet" type="text/css" href="css/stylesheet.css"> -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+
+	<!-- new code -->
+	<div class="hero-body">
+			<div class="container has-text-centered">
+					<div class="column is-6 is-offset-3">
+							<h1 class="title">
+								Drag and Drop - CSV to JSON
+							</h1>
+							<h2 class="subtitle">
+								Send JSON Events to Keen API Endpoint
+							</h2>
+
+
+
+							<div class="box">
+								<div class="field is-grouped">
+										<!-- <p class="control is-expanded">
+												<input id="feedbackText" class="input" type="text" placeholder="Enter your feedback...">
+										</p> -->
+
+										<div id="drop"> Or upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
+											<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+										</div>
+										<div id="output"></div>
+
+										<!-- <p class="control"> -->
+												<a id="submitButton" class="button is-info" id="submitButton">
+													<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+														Send
+												</a>
+										<!-- </p> -->
+								</div>
+								<div id="errornote" style="display:none"><p>Oops got an error, check your console logs!</p></div>
+								<div id="thankyou" style="display:none"><p>Thank you for your Feedback!</p></div>
+							</div>
+					</div>
+			</div>
+	</div>
+
+
+	<!-- og code -->
+	<!-- <h1>Drag and Drop to convert a CSV to JSON</h1> -->
+
+	<!-- <div id="drop"> Or upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
+		<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+	</div>
+	<div id="output"></div> -->
+
+<script type="text/javascript">
+
+
+
+var output = document.getElementById("output");
+
+//var csv is the CSV file with headers
+function csvJSON(csv){
+
+  var lines=csv.split("\n");
+
+  var result = [];
+
+  var headers=lines[0].split(",");
+
+  for(var i=1;i<lines.length;i++){
+
+	  var obj = {};
+	  var currentline=lines[i].split(",");
+
+	  for(var j=0;j<headers.length;j++){
+		  obj[headers[j]] = currentline[j];
+	  }
+
+	  result.push(obj);
+
+  }
+
+  //return result; //JavaScript object
+  return JSON.stringify(result); //JSON
+
+}
+
+    /* Drag drop code */
+    window.ondragover = function(e) {e.preventDefault()}
+    window.ondrop = function(e) {
+	    e.preventDefault();
+	    console.log("Reading...");
+	    var length = e.dataTransfer.items.length;
+	    if(length > 1){
+	    	console.log("Please only drop 1 file.");
+	    } else {
+	    	upload(e.dataTransfer.files[0]);
+	    }
+	}
+
+    /* main upload function */
+    function upload(file) {
+    	if( file.type.match(/text\/csv/) || file.type.match(/vnd\.ms-excel/) ){
+        //if(file.type.match(/text\/csv/)){
+	    	oFReader = new FileReader();
+	        oFReader.onloadend = function() {
+
+	        	// console.log(csvJSON(this.result));
+	        	var json = csvJSON(this.result);
+						console.log(json);
+
+	        	var blob = new Blob([json], {type: 'application/json'});
+						// console.log(blob);
+	        	var url = URL.createObjectURL(blob);
+	        	output.innerHTML = '<a href="'+url+'">JSON file</a>';
+
+	        };
+	        oFReader.readAsText(file);
+        } else {
+        	console.log("This file does not seem to be a CSV.");
+        }
+    }
+
+
+		$('#submitButton').click(function(){ SubmitFeedback(); return false; });
+
+			// Ajax Post Request with feedback for sentiment analysis and magnitude score via Google Cloud Function
+		var SubmitFeedback = function() {
+			$.ajax({
+					type: "POST",
+					url: "https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/converted_csv?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED",
+          data: JSON.stringify({ review_text: $('#feedbackText').val() }),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					// log a success if it sends as expected and display message in markup
+					success: function(data){
+						$("#thankyou").show();
+						$("#errornote").hide();
+						$("#submitButton").hide();
+						$("#feedbackText").hide();
+						console.log('success', data)
+					},
+					// log error message in our console if an error occurs and display message in markup
+					error: function(errMsg) {
+						$("#thankyou").hide();
+						$("#errornote").show();
+						console.log("got an error", errMsg)
+					}
+			});
+		}
+</script>
+</body>
+</html>

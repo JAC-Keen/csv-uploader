@@ -1,0 +1,20 @@
+User_ID,City,State,Email_Status,Satisfaction_Rating,Email_Campaign
+12,Seattle,WA,Opened,7,CLI Upload
+13,Seattle,WA,Clicked,8,CLI Upload
+14,Seattle,WA,Unsubscribed,9,CLI Upload
+15,Seattle,WA,Responded,7,CLI Upload
+16,Seattle,WA,Delivered,8,CLI Upload
+17,Seattle,WA,Bounced,9,CLI Upload
+18,Seattle,WA,Opened,7,CLI Upload
+19,Seattle,WA,Clicked,8,CLI Upload
+20,Dallas,TX,Unsubscribed,9,CLI Upload
+21,Dallas,TX,Responded,7,CLI Upload
+22,Dallas,TX,Delivered,8,CLI Upload
+23,Dallas,TX,Bounced,9,CLI Upload
+24,Dallas,TX,Opened,7,CLI Upload
+25,Dallas,TX,Clicked,8,CLI Upload
+26,Dallas,TX,Unsubscribed,9,CLI Upload
+27,Dallas,TX,Responded,7,CLI Upload
+28,Dallas,TX,Delivered,8,CLI Upload
+29,Dallas,TX,Bounced,9,CLI Upload
+30,Dallas,TX,Opened,10,CLI Upload
