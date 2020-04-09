@@ -21,13 +21,11 @@
 			<div class="container has-text-centered">
 					<div class="column is-6 is-offset-3">
 							<h1 class="title">
-								Drag and Drop - CSV to JSON
+								CSV to JSON | Drag and Drop
 							</h1>
 							<h2 class="subtitle">
-								Send JSON Events to Keen API Endpoint
+								Send your files to Keen
 							</h2>
-
-
 
 							<div class="box">
 								<div class="field is-grouped">
@@ -35,24 +33,32 @@
 												<input id="feedbackText" class="input" type="text" placeholder="Enter your feedback...">
 										</p> -->
 
-										<div id="drop"> Or upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
+										<div id="drop"> Upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
 											<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
 										</div>
-										<div id="output"></div>
-
-										<!-- <p class="control"> -->
+										<!-- <div id="output"></div> -->
+										<p class="control">
 												<a id="submitButton" class="button is-info" id="submitButton">
 													<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
 														Send
 												</a>
-										<!-- </p> -->
+										</p>
+
+										<!-- related to the codepen solution line ~121 -->
+										<!-- <div id="results"> </div> -->
 								</div>
-								<div id="errornote" style="display:none"><p>Oops got an error, check your console logs!</p></div>
-								<div id="thankyou" style="display:none"><p>Thank you for your Feedback!</p></div>
+								<div id="errornote" style="display:none"><p> 👾Oops got an error, please check your console log </p></div>
+								<div id="thankyou" style="display:none"><p> ✔️Sent Successfully!</p></div>
 							</div>
+							<!-- <div class="box">
+								<div class="field is-grouped"> -->
+									<div id="results"> </div>
+								<!-- </div>
+							</div> -->
 					</div>
 			</div>
 	</div>
+
 
 
 	<!-- og code -->
@@ -64,36 +70,39 @@
 	<div id="output"></div> -->
 
 <script type="text/javascript">
-var output = document.getElementById("output");
-//var csv is the CSV file with headers
-function csvJSON(csv){
-  var lines=csv.split("\n");
-  var result = [];
-  var headers=lines[0].split(",");
-  for(var i=1;i<lines.length;i++){
-	  var obj = {};
-	  var currentline=lines[i].split(",");
-	  for(var j=0;j<headers.length;j++){
-		  obj[headers[j]] = currentline[j];
-	  }
-	  result.push(obj);
-  }
-  //return result; //JavaScript object
-  return JSON.stringify(result); //JSON
-}
+	// og function
+		// var output = document.getElementById("output");
+		//var csv is the CSV file with headers
+		function csvJSON(csv){
+		  // replaced var lines=csv.split("\n");
+      // TBUpdated; Regex algorithm only supports a single row. Working for single row with multiple columns: test.csv > rows.csv | not working for multiple rows, needs to loop: cities.csv > list.csv
+			var lines = csv.split(/\r\n|\n|\r/);
+		  var result = [];
+		  var headers=lines[0].split(",");
+		  for(var i=1;i<lines.length;i++){
+			  var obj = {};
+			  var currentline=lines[i].split(",");
+			  for(var j=0;j<headers.length;j++){
+				  obj[headers[j]] = currentline[j];
+			  }
+			  result.push(obj);
+		  }
+		  //return result; //JavaScript object
+		  return JSON.stringify(result); //JSON
+		}
 
-    /* Drag drop code */
-    window.ondragover = function(e) {e.preventDefault()}
-    window.ondrop = function(e) {
-	    e.preventDefault();
-	    console.log("Reading...");
-	    var length = e.dataTransfer.items.length;
-	    if(length > 1){
-	    	console.log("Please only drop 1 file.");
-	    } else {
-	    	upload(e.dataTransfer.files[0]);
-	    }
-	}
+	  /* Drag drop code */
+	  window.ondragover = function(e) {e.preventDefault()}
+	  window.ondrop = function(e) {
+		  e.preventDefault();
+		  console.log("Reading...");
+		  var length = e.dataTransfer.items.length;
+		  if(length > 1){
+		   	console.log("Please only drop 1 file.");
+		  } else {
+		    upload(e.dataTransfer.files[0]);
+		  }
+		}
 
     /* main upload function */
     function upload(file) {
@@ -103,13 +112,20 @@ function csvJSON(csv){
 	        oFReader.onloadend = function() {
 	        	// console.log(csvJSON(this.result));
 	        	var json = csvJSON(this.result);
-						console.log(json);
+						// console.log(json);
 
-	        	var blob = new Blob([json], {type: 'application/json'});
-						console.log(blob);
+						// Pulled from a code/SO solution : https://codepen.io/jaq316/pen/oNXaZWJ : https://stackoverflow.com/questions/19699452/how-to-remove-square-bracket-from-json
+						var tmpStr = (json);
+						var newStr = tmpStr.substring(1, tmpStr.length-1);
+						document.getElementById('results').innerText = newStr;
+						console.log(newStr);
 
-	        	var url = URL.createObjectURL(blob);
-	        	output.innerHTML = '<a href="'+url+'">JSON file</a>';
+					 // Below used to create a new URL to view the Json object, no longer needed; May still be usefull if we create a function that loops through the entire list of Json Objects
+	        	// var blob = new Blob([json], {type: 'application/json'});
+						// console.log(blob);
+						//
+	        	// var url = URL.createObjectURL(blob);
+	        	// output.innerHTML = '<a href="'+url+'">JSON file</a>';
 	        };
 	        oFReader.readAsText(file);
         } else {
@@ -125,7 +141,8 @@ function csvJSON(csv){
 					type: "POST",
 					url: "https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/converted_csv?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED",
 					// data: JSON.stringify({ review_text: $('#feedbackText').val() }),
-          data: JSON.stringify({ review_text: "to be replaced" }),
+					// .text() https://stackoverflow.com/questions/19451144/how-do-i-get-html-tag-value-div-in-javascript
+          data: ($('#results').text()),
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					// log a success if it sends as expected and display message in markup
@@ -134,13 +151,16 @@ function csvJSON(csv){
 						$("#errornote").hide();
 						$("#submitButton").hide();
 						$("#feedbackText").hide();
+						$("#drop").hide();
 						console.log('success', data)
 					},
 					// log error message in our console if an error occurs and display message in markup
 					error: function(errMsg) {
 						$("#thankyou").hide();
 						$("#errornote").show();
-						console.log("got an error", errMsg)
+						$("#submitButton").hide();
+						$("#drop").hide();
+						console.log("error", errMsg)
 					}
 			});
 		}

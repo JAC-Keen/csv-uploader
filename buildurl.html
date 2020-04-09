@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="section">
+            <div class="section__indicator">
+              1
+            </div>
+            <div class="section__content">
+              <h2>Upload your CSV file</h2>
+            <div class="input-group">
+                  <div>
+                  <input type="file" id="storeDataCsv" accept=".csv">
+                  <label class="custom-file-label" for="storeDataCsv">
+                  Choose file (csv)
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+            2
+          </div>
+          <div class="section__content">
+              <h2>Enter your Project ID</h2>
+              <form>
+              <input type="text" id="projectID" value="">
+            </form>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+            3
+          </div>
+          <div class="section__content">
+              <h2>Enter your Write Key</h2>
+              <form>
+                <input type="text" value="">
+              </form>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+             4
+            </div>
+            <div class="section__content">
+              <h2>Enter a Name for your Collection</h2>
+              <form>
+                <input type="text" value=" ">
+              </form>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+            5
+          </div>
+          <div class="section__content">
+            <h2>We're making a POST Request to your API Endpoint</h2>
+              <p> Does the following look correct? <br> <a href="https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME?api_key=WRITE_KEY"> https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME?api_key=WRITE_KEY </a> <br> </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section__indicator">
+            6
+          </div>
+          <div class="section__content">
+            <form action="https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/pseudo_test?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED&data=ewogICJzYWx1dGF0aW9uX3BocmFzZSI6ICJIZWxsbyBXb3JsZCEiCn0=">
+              <h2>Submit your file</h2>
+              <!-- <input type="submit" value="Submit ✔️"> -->
+              <button type="submit" formmethod="post">POST ✔️</button>
+            </form>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- Logic , alter the html elements/jquery selectors to update the url -->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#form").on('submit', function (e) {
+          e.preventDefault();
+          window.location.replace("https://api.keen.io/3.0/projects/" + $("#place").val() + "/" + $("#day").val() + "-" + $("#month").val() + "-" + $("#year").val() + "/" + $("#id_number").val());
+        });
+      });
+    </script>
+
+  </body>
+</html>

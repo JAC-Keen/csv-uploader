@@ -1,102 +1,167 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <title></title>
-  </head>
-  <body>
+<html>
+<head>
+<title>CSV to JSON </title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <div class="container">
-        <div class="section">
-            <div class="section__indicator">
-              1
-            </div>
-            <div class="section__content">
-              <h2>Upload your CSV file</h2>
-            <div class="input-group">
-                  <div>
-                  <input type="file" id="storeDataCsv" accept=".csv">
-                  <label class="custom-file-label" for="storeDataCsv">
-                  Choose file (csv)
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.4/css/bulma.min.css" />
+	<!--   <link rel="stylesheet" type="text/css" href="css/stylesheet.css"> -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
-        <div class="section">
-          <div class="section__indicator">
-            2
-          </div>
-          <div class="section__content">
-              <h2>Enter your Project ID</h2>
-              <form>
-              <input type="text" id="projectID" value="">
-            </form>
-          </div>
-        </div>
+</head>
+<body>
 
-        <div class="section">
-          <div class="section__indicator">
-            3
-          </div>
-          <div class="section__content">
-              <h2>Enter your Write Key</h2>
-              <form>
-                <input type="text" value="">
-              </form>
-          </div>
-        </div>
+	<!-- new code -->
+	<div class="hero-body">
+			<div class="container has-text-centered">
+					<div class="column is-6 is-offset-3">
+							<h1 class="title">
+								CSV to JSON | Drag and Drop
+							</h1>
+							<h2 class="subtitle">
+								Send your files to Keen
+							</h2>
 
-        <div class="section">
-          <div class="section__indicator">
-             4
-            </div>
-            <div class="section__content">
-              <h2>Enter a Name for your Collection</h2>
-              <form>
-                <input type="text" value=" ">
-              </form>
-          </div>
-        </div>
+							<div class="box">
+								<div class="field is-grouped">
+										<!-- <p class="control is-expanded">
+												<input id="feedbackText" class="input" type="text" placeholder="Enter your feedback...">
+										</p> -->
 
-        <div class="section">
-          <div class="section__indicator">
-            5
-          </div>
-          <div class="section__content">
-            <h2>We're making a POST Request to your API Endpoint</h2>
-              <p> Does the following look correct? <br> <a href="https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME?api_key=WRITE_KEY"> https://api.keen.io/3.0/projects/PROJECT_ID/events/COLLECTION_NAME?api_key=WRITE_KEY </a> <br> </p>
-          </div>
-        </div>
+										<div id="drop"> Upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
+											<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+										</div>
+										<!-- <div id="output"></div> -->
+										<p class="control">
+												<a id="submitButton" class="button is-info" id="submitButton">
+													<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+														Send
+												</a>
+										</p>
 
-        <div class="section">
-          <div class="section__indicator">
-            6
-          </div>
-          <div class="section__content">
-            <form action="https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/pseudo_test?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED&data=ewogICJzYWx1dGF0aW9uX3BocmFzZSI6ICJIZWxsbyBXb3JsZCEiCn0=">
-              <h2>Submit your file</h2>
-              <!-- <input type="submit" value="Submit ✔️"> -->
-              <button type="submit" formmethod="post">POST ✔️</button>
-            </form>
-          </div>
-        </div>
-    </div>
+										<!-- related to the codepen solution line ~121 -->
+										<!-- <div id="results"> </div> -->
+								</div>
+								<div id="errornote" style="display:none"><p> 👾Oops got an error, please check your console log </p></div>
+								<div id="thankyou" style="display:none"><p> ✔️Sent Successfully!</p></div>
+							</div>
+							<!-- <div class="box">
+								<div class="field is-grouped"> -->
+									<div id="results"> </div>
+								<!-- </div>
+							</div> -->
+					</div>
+			</div>
+	</div>
 
 
-    <!-- Logic , alter the html elements/jquery selectors to update the url -->
-    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#form").on('submit', function (e) {
-          e.preventDefault();
-          window.location.replace("https://api.keen.io/3.0/projects/" + $("#place").val() + "/" + $("#day").val() + "-" + $("#month").val() + "-" + $("#year").val() + "/" + $("#id_number").val());
-        });
-      });
-    </script>
 
-  </body>
+	<!-- og code -->
+	<!-- <h1>Drag and Drop to convert a CSV to JSON</h1> -->
+
+	<!-- <div id="drop"> Or upload a CSV <button onclick="document.querySelector('input').click()"> Select </button>
+		<input style="visibility: collapse; width: 0px;" type="file" onchange="upload(this.files[0])">
+	</div>
+	<div id="output"></div> -->
+
+<script type="text/javascript">
+
+		function csvJSON(csv){
+		  // var lines=csv.split("\n");
+			// TBUpdated; Regex algorithm only supports a single row. Working for single row with multiple columns: test.csv > rows.csv | not working for multiple rows, needs to loop: cities.csv > list.csv
+			var lines = csv.split(/\r\n|\n|\r/);
+		  var result = [];
+		  var headers=lines[0].split(",");
+		  for(var i=1;i<lines.length;i++){
+			  var obj = {};
+			  var currentline=lines[i].split(",");
+			  for(var j=0;j<headers.length;j++){
+				  obj[headers[j]] = currentline[j];
+			  }
+			  result.push(obj);
+		  }
+		  //return result; //JavaScript object
+		  return JSON.stringify(result); //JSON
+		}
+
+	  /* Drag drop code */
+	  window.ondragover = function(e) {e.preventDefault()}
+	  window.ondrop = function(e) {
+		  e.preventDefault();
+		  console.log("Reading...");
+		  var length = e.dataTransfer.items.length;
+		  if(length > 1){
+		   	console.log("Please only drop 1 file.");
+		  } else {
+		    upload(e.dataTransfer.files[0]);
+		  }
+		}
+
+    /* main upload function */
+    function upload(file) {
+    	if( file.type.match(/text\/csv/) || file.type.match(/vnd\.ms-excel/) ){
+        //if(file.type.match(/text\/csv/)){
+	    	oFReader = new FileReader();
+	        oFReader.onloadend = function() {
+	        	// console.log(csvJSON(this.result));
+	        	var json = csvJSON(this.result);
+						// console.log(json);
+
+						// Pulled from a code/SO solution : https://codepen.io/jaq316/pen/oNXaZWJ : https://stackoverflow.com/questions/19699452/how-to-remove-square-bracket-from-json
+						var tmpStr = (json);
+						var newStr = tmpStr.substring(1, tmpStr.length-1);
+						document.getElementById('results').innerText = newStr;
+						console.log(newStr);
+
+					 // Below used to create a new URL to view the Json object, no longer needed; May still be usefull if we create a function that loops through the entire list of Json Objects
+	        	// var blob = new Blob([json], {type: 'application/json'});
+						// console.log(blob);
+						//
+	        	// var url = URL.createObjectURL(blob);
+	        	// output.innerHTML = '<a href="'+url+'">JSON file</a>';
+	        };
+	        oFReader.readAsText(file);
+        } else {
+        	console.log("This file does not seem to be a CSV.");
+        }
+    }
+
+		$('#submitButton').click(function(){ SubmitFeedback(); return false; });
+			// *recycle Ajax Post Request with feedback for sentiment analysis and magnitude score via Google Cloud Function
+			// this function below needs to be able to replace the "data:" payload with the json object (currently having issues)
+		var SubmitFeedback = function() {
+			$.ajax({
+					type: "POST",
+					url: "https://api.keen.io/3.0/projects/5e3ba28ec9e77c000184406d/events/converted_csv?api_key=79CDDE1BEAEA3E0945D6A3EE66AD83056D5A835BC26ACFC44C9FA46CC37304B6188FD161E87FE6A90BA57D6D5E7154710584CDAC71DF051C11815AFF55AFFA0E2DDF842A0CB9D9B1B26CC9DC880C10A88E8E44C322F980330F70A78CABDD58ED",
+					// data: JSON.stringify({ review_text: $('#feedbackText').val() }),
+					// .text() https://stackoverflow.com/questions/19451144/how-do-i-get-html-tag-value-div-in-javascript
+          data: ($('#results').text()),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					// log a success if it sends as expected and display message in markup
+					success: function(data){
+						$("#thankyou").show();
+						$("#errornote").hide();
+						$("#submitButton").hide();
+						$("#feedbackText").hide();
+						$("#drop").hide();
+						console.log('success', data)
+					},
+					// log error message in our console if an error occurs and display message in markup
+					error: function(errMsg) {
+						$("#thankyou").hide();
+						$("#errornote").show();
+						$("#submitButton").hide();
+						$("#drop").hide();
+						console.log("error", errMsg)
+					}
+			});
+		}
+</script>
+</body>
 </html>
